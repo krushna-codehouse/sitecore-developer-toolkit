@@ -1,0 +1,19 @@
+---
+description: Component structure
+globs: src/components/**
+alwaysApply: false
+---
+
+# Component rules
+
+Every component folder contains:
+
+- `Name.tsx`: default export, named the same as the folder and the Sitecore rendering
+- `Name.types.ts`: `NameFields`, `NameParams`, `NameProps`
+- `Name.mock.ts`: `mockNameProps` fixture shared by tests and stories
+- `Name.test.tsx`: tests built on the mock
+- `Name.module.css`: component styles (CSS modules only)
+- `index.ts`: re-exports
+
+Create components with `npm run sc:component:create -- [folder/]Name`.
+Check them with `npm run sc:component:check`.

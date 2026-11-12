@@ -1,0 +1,17 @@
+query GetRelatedArticles($rootPath: String!, $templateId: String!, $language: String!, $first: Int = 3) {
+  search(
+    where: {
+      AND: [
+        { name: "_path", value: $rootPath, operator: CONTAINS }
+        { name: "_templates", value: $templateId, operator: CONTAINS }
+        { name: "_language", value: $language }
+      ]
+    }
+    first: $first
+  ) {
+    total
+    results {
+      ...ArticleTeaserFields
+    }
+  }
+}

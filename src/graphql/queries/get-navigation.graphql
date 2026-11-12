@@ -1,0 +1,10 @@
+query GetNavigation($path: String!, $language: String!) {
+  item(path: $path, language: $language) {
+    ...NavigationItemFields
+    children(hasLayout: true) {
+      results {
+        ...NavigationItemFields
+      }
+    }
+  }
+}

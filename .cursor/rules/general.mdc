@@ -1,0 +1,10 @@
+---
+description: General project conventions
+alwaysApply: true
+---
+
+- TypeScript strict mode. No `any` unless a comment explains why.
+- Follow AGENTS.md. Use the `sc` CLI instead of doing its job by hand.
+- Prefer small, focused changes. Do not reformat unrelated code.
+- Use `import type` for type-only imports.
+- Before finishing, run `npm run sc:validate` and fix what it reports.

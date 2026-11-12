@@ -1,0 +1,73 @@
+name: Sitecore quality checks
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency:
+  group: quality-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      # Optional: configure these in the repository settings to enable the live content check.
+      SITECORE_EDGE_CONTEXT_ID: ${{ secrets.SITECORE_EDGE_CONTEXT_ID }}
+      NEXT_PUBLIC_DEFAULT_SITE_NAME: ${{ vars.SITECORE_SITE_NAME }}
+      NEXT_PUBLIC_DEFAULT_LANGUAGE: ${{ vars.SITECORE_LANGUAGE || 'en' }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Formatting
+        run: npm run format:check
+
+      - name: Type check
+        run: npm run type-check
+
+      - name: Tests with coverage
+        run: npm test -- --ci --coverage
+
+      - name: Component diagnostics
+        run: npm run sc:component:check
+
+      - name: GraphQL validation
+        run: npm run sc:graphql:validate
+
+      - name: Live Sitecore content check
+        if: ${{ env.SITECORE_EDGE_CONTEXT_ID != '' }}
+        run: npm run sc:content:check
+
+      - name: Dependency audit
+        run: npm audit --audit-level=high --omit=dev
+
+      - name: Build
+        run: npm run build
+
+      - name: Health report
+        if: always()
+        run: npm run --silent sc:project:health -- --json > /dev/null || true
+
+      - name: Upload health report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: health-report
+          path: reports/health.json
+          if-no-files-found: ignore

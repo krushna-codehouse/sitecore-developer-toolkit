@@ -1,0 +1,13 @@
+---
+description: Testing rules
+globs: '**/*.test.ts,**/*.test.tsx'
+alwaysApply: false
+---
+
+# Testing rules
+
+1. Use Jest and React Testing Library. Query by role or label, not by class name.
+2. Build test props from the component's `*.mock.ts` fixture.
+3. Cover the happy path, a missing datasource and editing mode (`field.editable`).
+4. Do not snapshot whole components. Assert on behaviour.
+5. Keep coverage above the thresholds in `jest.config.mjs`.

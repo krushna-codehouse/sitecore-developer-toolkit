@@ -1,0 +1,15 @@
+---
+description: GraphQL development rules
+globs: src/graphql/**,**/*.graphql
+alwaysApply: false
+---
+
+# GraphQL rules
+
+1. Store operations in `src/graphql/queries` and fragments in `src/graphql/fragments`.
+2. One named operation per file. The PascalCase operation name matches the kebab-case file name (`get-navigation.graphql` → `GetNavigation`).
+3. Use variables for every dynamic input. Never build queries with string interpolation.
+4. Request only the fields the component renders. Prefer shared fragments over copy-pasted selections.
+5. Keep query depth at or below the limit in `toolkit.config.ts`.
+6. Regenerate types with `npm run codegen` and use the generated operation types.
+7. Validate with `npm run sc:graphql:validate`.

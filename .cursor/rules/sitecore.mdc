@@ -1,0 +1,15 @@
+---
+description: Sitecore Content SDK rules
+globs: src/**/*.tsx,src/**/*.ts
+alwaysApply: false
+---
+
+# Sitecore rules
+
+1. Import field types and field components from `@/lib/sitecore` (the SDK swap point).
+2. Use field components (`Text`, `RichText`, `Image`, `Link`). Rendering raw `.value` breaks inline editing in Pages.
+3. Components must render something meaningful in editing mode when the datasource is empty.
+4. Field names in `*.types.ts` must match the Sitecore template field names exactly (case-sensitive).
+5. Rendering parameters arrive as strings. Parse numbers and booleans explicitly.
+6. Read Sitecore credentials only in server code. Never expose `SITECORE_*` secrets to the client.
+7. Do not invent Content SDK APIs. If an API is not in the code base or the official docs, ask.

@@ -1,0 +1,410 @@
+:root {
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --border: #e3e6eb;
+  --text: #1b1f24;
+  --muted: #5f6873;
+  --accent: #c8102e;
+  --pass: #1a7f37;
+  --pass-bg: #e6f4ea;
+  --warn: #9a6700;
+  --warn-bg: #fff4d6;
+  --fail: #c62828;
+  --fail-bg: #fdecea;
+  --skip: #6e7781;
+  --skip-bg: #eef0f2;
+  --code-bg: #f0f2f5;
+  --radius: 10px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f1216;
+    --surface: #171b21;
+    --border: #2a3039;
+    --text: #e6e9ed;
+    --muted: #9aa4af;
+    --accent: #ff5a6e;
+    --pass: #4ac26b;
+    --pass-bg: #12301c;
+    --warn: #e3b341;
+    --warn-bg: #3a2e0c;
+    --fail: #ff7b72;
+    --fail-bg: #3d1614;
+    --skip: #9aa4af;
+    --skip-bg: #232931;
+    --code-bg: #222831;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font:
+    15px/1.5 system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
+}
+
+a {
+  color: var(--accent);
+}
+
+code {
+  font-family: ui-monospace, 'Cascadia Code', Consolas, monospace;
+  font-size: 0.85em;
+  background: var(--code-bg);
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  overflow-wrap: anywhere;
+}
+
+h1 {
+  margin: 0 0 0.25rem;
+  font-size: 1.6rem;
+}
+
+h2 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+h3 {
+  font-size: 0.95rem;
+  margin: 1.25rem 0 0.5rem;
+}
+
+.wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.topbar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.topbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 56px;
+  flex-wrap: wrap;
+}
+
+.brand {
+  font-weight: 700;
+  color: var(--text);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.brand-mark {
+  color: var(--accent);
+}
+
+nav {
+  display: flex;
+  gap: 1.25rem;
+}
+
+nav a {
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+nav a:hover {
+  color: var(--text);
+}
+
+main {
+  padding-top: 1.5rem;
+  padding-bottom: 3rem;
+}
+
+.page-head {
+  margin-bottom: 1.25rem;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.small {
+  font-size: 0.85rem;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin-bottom: 1rem;
+}
+
+.stat {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-label {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.stat-pass {
+  border-color: var(--pass);
+}
+.stat-warn {
+  border-color: var(--warn);
+}
+.stat-fail {
+  border-color: var(--fail);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  min-width: 0;
+  margin-bottom: 16px;
+}
+
+.grid .card {
+  margin-bottom: 0;
+}
+
+.card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.card-foot {
+  border-top: 1px solid var(--border);
+  margin-top: 0.75rem;
+  padding-top: 0.5rem;
+}
+
+.results,
+.plain {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.plain li {
+  padding: 0.25rem 0;
+}
+
+.result {
+  display: grid;
+  grid-template-columns: 76px 1fr;
+  gap: 0.75rem;
+  padding: 0.6rem 0;
+  border-top: 1px solid var(--border);
+}
+
+.result:first-child {
+  border-top: 0;
+}
+
+.result-title {
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.result-message {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.details {
+  margin: 0.35rem 0 0;
+  padding-left: 1rem;
+  font-size: 0.85rem;
+}
+
+.badge {
+  display: inline-block;
+  text-align: center;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 0.2rem 0.5rem;
+  border-radius: 999px;
+  height: fit-content;
+  white-space: nowrap;
+}
+
+.badge-pass {
+  color: var(--pass);
+  background: var(--pass-bg);
+}
+.badge-warn {
+  color: var(--warn);
+  background: var(--warn-bg);
+}
+.badge-fail {
+  color: var(--fail);
+  background: var(--fail-bg);
+}
+.badge-skip {
+  color: var(--skip);
+  background: var(--skip-bg);
+}
+
+.table-scroll {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.table th,
+.table td {
+  text-align: left;
+  padding: 0.5rem 0.6rem;
+  border-top: 1px solid var(--border);
+  vertical-align: top;
+}
+
+.table th {
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 0.8rem;
+  border-top: 0;
+}
+
+.matrix td.yes,
+.matrix td.no {
+  text-align: center;
+}
+
+.yes {
+  color: var(--pass);
+}
+
+.no {
+  color: var(--fail);
+}
+
+.cmd {
+  white-space: nowrap;
+}
+
+.create-form label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+}
+
+.create-form .row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.create-form input[type='text'],
+.create-form input:not([type]) {
+  flex: 1;
+  min-width: 0;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+}
+
+.create-form .checkbox {
+  font-weight: 400;
+  margin-top: 0.6rem;
+  color: var(--muted);
+}
+
+button {
+  padding: 0.55rem 1rem;
+  border: 0;
+  border-radius: 8px;
+  background: var(--accent);
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button:disabled,
+input:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.notice {
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.notice ul {
+  margin: 0.4rem 0 0;
+  padding-left: 1.1rem;
+}
+
+.notice-ok {
+  background: var(--pass-bg);
+  color: var(--pass);
+}
+
+.notice-error {
+  background: var(--fail-bg);
+  color: var(--fail);
+}
+
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .result {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+  }
+}

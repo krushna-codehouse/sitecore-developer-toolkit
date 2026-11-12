@@ -1,0 +1,13 @@
+fragment ArticleTeaserFields on Item {
+  id
+  name
+  url {
+    path
+  }
+  title: field(name: "Title") {
+    value
+  }
+  summary: field(name: "Summary") {
+    value
+  }
+}

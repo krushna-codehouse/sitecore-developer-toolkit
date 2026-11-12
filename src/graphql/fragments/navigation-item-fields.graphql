@@ -1,0 +1,8 @@
+fragment NavigationItemFields on Item {
+  id
+  name
+  displayName
+  url {
+    path
+  }
+}

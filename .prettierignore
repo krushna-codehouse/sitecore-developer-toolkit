@@ -1,0 +1,8 @@
+.next
+node_modules
+coverage
+reports
+package-lock.json
+src/graphql/generated
+src/graphql/schema.graphql
+templates

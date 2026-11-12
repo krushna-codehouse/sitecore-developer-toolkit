@@ -1,0 +1,1 @@
+npm run type-check && npm test -- --ci && npm run sc:component:check && npm run sc:graphql:validate
